@@ -46,4 +46,9 @@ users: User[];
     userInfo.
   }
 */
+
+  setRangeVal(){
+    //alert();
+    //https://mdbootstrap.com/docs/angular/forms/slider/
+  }
 }
