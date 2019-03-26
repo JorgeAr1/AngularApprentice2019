@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from './user';
 import { HttpClient } from '@angular/common/http';
+import { userInfo } from 'os';
 
 
 @Component({
@@ -12,28 +13,56 @@ import { HttpClient } from '@angular/common/http';
 
 export class UsertableComponent implements OnInit {
 usersCount = 5;
-users: User[];
+users: Array<User>;
+showLoading = true;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+    //this.users = new Array<User>();
+  }
 
   ngOnInit() {
     this.getUserApi();
   }
 
-  getUserApi() {
-    //this.users = User[this.usersCount];
+  async finish(i) {
+    if ( i == this.usersCount){
+      this.showLoading = false;
+    }
+  }
+
+  getOneUserApi(i) {
     const ROOT_URL = 'https://randomuser.me/api/?results=' + this.usersCount + '&inc=name,location,email,picture';
     this.http.get(ROOT_URL).subscribe( (data) => {
-      this.users = data.results;
-      //this.order();
+        this.users.push(data.results[i]);
+        this.finish(i);
       }
     );
   }
-/*
-  order() {
-    userInfo.
+
+  getUserApi() {
+    //this.users = User[this.usersCount];
+    /*const ROOT_URL = 'https://randomuser.me/api/?results=' + this.usersCount + '&inc=name,location,email,picture';
+    this.http.get(ROOT_URL).subscribe( (data) => {
+        this.users = data.results;
+        this.order();
+      }
+    );*/
+    this.users = new Array<User>();;
+    for (let i = 0; i < this.usersCount; i++) {
+      this.getOneUserApi(i);
+    }
   }
-*/
+
+  order() {/*
+    this.users.forEach(element => {
+      this.users[0] = element;
+    });*/
+    this.users.forEach(elem => {
+      console.log(elem);
+      this.users.push(elem);
+    });
+  }
+
   setRangeVal() {
     const stringCount = ((document.getElementById('usersRange') as HTMLInputElement).value);
     this.usersCount = +stringCount;
