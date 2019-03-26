@@ -16,9 +16,7 @@ usersCount = 5;
 users: Array<User>;
 showLoading = true;
 
-  constructor(private http: HttpClient) { 
-    //this.users = new Array<User>();
-  }
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
     this.getUserApi();
@@ -40,23 +38,13 @@ showLoading = true;
   }
 
   getUserApi() {
-    //this.users = User[this.usersCount];
-    /*const ROOT_URL = 'https://randomuser.me/api/?results=' + this.usersCount + '&inc=name,location,email,picture';
-    this.http.get(ROOT_URL).subscribe( (data) => {
-        this.users = data.results;
-        this.order();
-      }
-    );*/
     this.users = new Array<User>();;
     for (let i = 0; i < this.usersCount; i++) {
       this.getOneUserApi(i);
     }
   }
 
-  order() {/*
-    this.users.forEach(element => {
-      this.users[0] = element;
-    });*/
+  order() {
     this.users.forEach(elem => {
       console.log(elem);
       this.users.push(elem);
@@ -67,6 +55,5 @@ showLoading = true;
     const stringCount = ((document.getElementById('usersRange') as HTMLInputElement).value);
     this.usersCount = +stringCount;
     this.getUserApi();
-    //https://mdbootstrap.com/docs/angular/forms/slider/
   }
 }
