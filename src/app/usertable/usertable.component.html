@@ -1,66 +1,57 @@
 <br>
 <br>
-<!-- <table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Name</th>
-      <th scope="col">Email</th>
-      <th scope="col">Picture</th>
-    </tr>
-  </thead>
-  <tbody> -->
-<!-- <div *ngFor="let user of users; index as i">
-  <div class="card" style="width: 18rem;">
-    <img class="card-img-top img-circle" src="{{ user.picture.large }}" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">{{ user.name.first + " " +user.name.last }}</h5>
-      <p class="card-text">{{ user.email }}</p>
-    </div>
-  </div>
-</div> -->
-<!-- 
-    <tr *ngFor="let user of users; index as i">
-      <th scope="row">{{ i + 1 }}</th>
-      <td>
-        <img [src]="'https://upload.wikimedia.org/wikipedia/commons/f/f3/Flag_of_Russia.svg'" class="mr-2" style="width: 20px">
-        {{ user.name.first + " " +user.name.last }}
-      </td>
-      <td>{{ user.email }}</td>
-      <td>{{ user.picture.large }}</td>
-    </tr>
-  </tbody>
-</table> -->
 
-<label for="customRange3">Count for users: {{usersCount}}</label>
-<input type="range" class="custom-range" min="1" max="50" step="1" id="usersRange" (change) ="setRangeVal()">
+
+<div class="w-75 p-3 container" style="background-color: #eee;">
+  <label for="customRange3">Count for users: {{usersCount}}</label>
+  <input value="{{this.usersCount}}" type="range" class="custom-range" min="1" max="50" step="1" id="usersRange"
+    (change)="setRangeVal()">
+</div>
+
 
 <section id="team" class="pb-5">
   <div class="container">
 
-
-    <div *ngFor="let user of users; index as i">
-
-      <div class="row">
+    <div *ngIf="!users">
+      <div class="row" style="margin-top: 20px;">
 
         <div class="col-xs-12 col-sm-8 col-md-6 container">
           <div class="image-flip">
             <div class="frontside">
               <div class="card">
-                <div class="card-body text-center">
-                  <p><img class="img-fluid img-circle" src="{{ user.picture.large }}" alt="card image">
-                  </p>
-                  <h4 class="card-title">{{ user.name.first + " " +user.name.last | titlecase }}</h4>
-                  <p class="card-text">My email is: {{ user.email }}</p>
+                <div class="card-body text-center" style="background-color: rgba(134, 168, 184, 0.479);">
+                  <div class="spinner-grow loader" style="width: 3rem; height: 3rem;" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </div>
+    </div>
 
-
+    <div *ngFor="let user of users; index as i">
+      <div class="row" style="margin-top: 20px;">
+        <div class="col-xs-12 col-sm-8 col-md-6 container">
+          <div class="image-flip">
+            <div class="frontside">
+              <div class="card">
+                <div class="card-body text-center" style="background-color: rgba(134, 168, 184, 0.479);">
+                  <div class="float-left">
+                    <span class="badge badge-light float">{{i + 1}}</span>
+                  </div>
+                  <p><img class="img-fluid img-circle" src="{{ user.picture.large }}" alt="card image">
+                  </p>
+                  <h4 class="card-title">{{ user.name.first + " " +user.name.last | titlecase }}</h4>
+                  <p class="card-text">My email is: <br>{{ user.email }}</p>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
