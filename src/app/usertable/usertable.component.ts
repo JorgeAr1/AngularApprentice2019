@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from './user';
 import { HttpClient } from '@angular/common/http';
-import { userInfo } from 'os';
+
 
 
 @Component({
@@ -12,7 +12,7 @@ import { userInfo } from 'os';
 
 
 export class UsertableComponent implements OnInit {
-usersCount = 5;
+usersCount = 8;
 users: Array<User>;
 showLoading = true;
 
